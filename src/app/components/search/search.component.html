@@ -1,0 +1,31 @@
+<div class="container o-top">
+
+	<div class="row">
+		<div class="col-md-3">
+			<label for="termino">Buscar artista</label>
+			<input type="text" (change)='BuscarArtista()' placeholder="Buscar artista" class="form-control" [(ngModel)]="termino">
+		</div>
+
+		<div class="col-md-9" *ngIf="termino">
+			<h1>{{termino}}</h1>
+			<hr>
+			<!-- manejo de mascara -->
+			<app-loading *ngIf="blMask"></app-loading>
+			<!-- manejo de error -->
+			<div *ngIf="blError" class="alert alert-danger animated fade-in">
+				<h3>Error</h3>
+				<p>{{sbMessageError}}</p>
+			</div>
+			<div class="row">
+
+				<div class="col-md-3 puntero" *ngFor="let i of _spotifyService.arArtist" [routerLink]="['/artist',i.id]">
+					<!-- si no tiene error se muestra la respuesta -->
+					<img *ngIf="!blerror" src={{i.images|sinFoto}} class="img-thumbnail">
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
